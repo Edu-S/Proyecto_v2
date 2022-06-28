@@ -34,12 +34,11 @@ namespace Proyecto_v2
 
         private void FProducto_Load(object sender, EventArgs e)
         {
-            List<string> lista = datos.ListarProveedores();
+            List<string> lista = datos.NombresProveedores();
+
             cbProveedor.Items.Clear();
             foreach (string item in lista)
                 cbProveedor.Items.Add(item);
-            if (cbProveedor.Items.Count > 0)
-                cbProveedor.SelectedIndex = 0;
 
             if (agregarProducto)
             {
@@ -64,12 +63,19 @@ namespace Proyecto_v2
                 mtCodigo.Enabled = false;
                 gbTipo.Enabled = false;
 
-                rbInstrumento.Checked = datos.ExisteInstrumento(codigo);
+                if (datos.ExisteInstrumento(codigo))
+                    rbInstrumento.Checked = true;
+                else
+                    rbAccesorio.Checked = true;
+
                 tNombre.Text = datos.ProductoNombre(codigo);
                 cbCategoria.Text = datos.ProductoCategoria(codigo);
                 mtPrecio.Text = datos.ProductoPrecio(codigo).ToString("F2");
                 dtFecha.Value = datos.ProductoFecha(codigo);
-                cbProveedor.Text = datos.ProductoNombre(codigo);
+
+                string nombreProveedor = datos.ProductoProveedor(codigo);
+                if (cbProveedor.Items.Contains(nombreProveedor))
+                    cbProveedor.SelectedIndex = cbProveedor.Items.IndexOf(nombreProveedor);
             }
         }
 
@@ -80,7 +86,8 @@ namespace Proyecto_v2
             string nuevaCategoria = cbCategoria.Text.Trim();
             double nuevoPrecio = (mtPrecio.MaskFull) ? Convert.ToDouble(mtPrecio.Text) : 0;
             DateTime nuevaFecha = dtFecha.Value;
-            string nuevoProveedor = cbProveedor.Text;
+
+            string nuevoProveedor = (cbProveedor.Text.Trim() != "") ? datos.ProveedorCuit(cbProveedor.Text.Trim()) : "";
 
             if (!mtCodigo.MaskFull)
             {
@@ -106,24 +113,20 @@ namespace Proyecto_v2
                 }
                 else
                 {
-                    string cuit_proveedor = nuevoProveedor.Split()[0];
-
                     if (rbAccesorio.Checked)
-                        datos.InsertarAccesorio(nuevoCodigo, nuevoNombre, nuevaCategoria, nuevoPrecio, nuevaFecha, cuit_proveedor);
+                        datos.InsertarAccesorio(nuevoCodigo, nuevoNombre, nuevaCategoria, nuevoPrecio, nuevaFecha, nuevoProveedor);
                     else
-                        datos.InsertarInstrumento(nuevoCodigo, nuevoNombre, nuevaCategoria, nuevoPrecio, nuevaFecha, cuit_proveedor);
+                        datos.InsertarInstrumento(nuevoCodigo, nuevoNombre, nuevaCategoria, nuevoPrecio, nuevaFecha, nuevoProveedor);
 
                     DialogResult = DialogResult.OK;
                 }
             }
             else
             {
-                string cuit_proveedor = nuevoProveedor.Split()[0];
-
                 if (rbAccesorio.Checked)
-                    datos.ModificarAccesorio(nuevoCodigo, nuevoNombre, nuevaCategoria, nuevoPrecio, nuevaFecha, cuit_proveedor);
+                    datos.ModificarAccesorio(nuevoCodigo, nuevoNombre, nuevaCategoria, nuevoPrecio, nuevaFecha, nuevoProveedor);
                 else
-                    datos.ModificarInstrumento(nuevoCodigo, nuevoNombre, nuevaCategoria, nuevoPrecio, nuevaFecha, cuit_proveedor);
+                    datos.ModificarInstrumento(nuevoCodigo, nuevoNombre, nuevaCategoria, nuevoPrecio, nuevaFecha, nuevoProveedor);
 
                 DialogResult = DialogResult.OK;
             }
@@ -132,7 +135,7 @@ namespace Proyecto_v2
         private void mtCodigo_Validating(object sender, CancelEventArgs e)
         {
             epCodigo.Clear();
-            if (!mtCodigo.MaskFull)
+            if (mtCodigo.Text.Trim() == "")
                 epCodigo.SetError(mtCodigo,"Ingresar código");
         }
 
@@ -155,6 +158,27 @@ namespace Proyecto_v2
             epProveedor.Clear();
             if (cbProveedor.Text.Trim() == "")
                 epProveedor.SetError(cbProveedor, "Ingresar Proveedor");
+        }
+
+        private void actualizarCategorias()
+        {
+            string selecTipo = (rbInstrumento.Checked) ? "Instrumentos" : "Accesorios";
+            List<string> listaCategorias = datos.ProductoCategorias(selecTipo);
+
+            cbCategoria.Items.Clear();
+            foreach (string categoria in listaCategorias)
+                cbCategoria.Items.Add(categoria);
+        }
+
+        private void rbInstrumento_CheckedChanged(object sender, EventArgs e)
+        {
+            actualizarCategorias();
+        }
+
+        private void mtCodigo_Leave(object sender, EventArgs e)
+        {
+            if (mtCodigo.Text.Trim() != "")
+                mtCodigo.Text = Convert.ToInt32(mtCodigo.Text).ToString("0000");
         }
     }
 }

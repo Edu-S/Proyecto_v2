@@ -179,13 +179,13 @@ namespace Proyecto_v2
 
         public bool ExisteInstrumento(int codigo)
         {
-            Instrumento instrumento = new Instrumento(codigo);
+            Producto instrumento = new Instrumento(codigo);
             return listaProductos.Contains(instrumento);
         }
 
         public bool ExisteAccesorio(int codigo)
         {
-            Accesorio accesorio = new Accesorio(codigo);
+            Producto accesorio = new Accesorio(codigo);
             return listaProductos.Contains(accesorio);
         }
 

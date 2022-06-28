@@ -49,8 +49,10 @@ namespace Proyecto_v2
             
             cbCategoria.Items.Clear();
             cbCategoria.Items.Add("Todas");
+
             foreach (string categoria in listaCategorias)
                 cbCategoria.Items.Add(categoria);
+
             cbCategoria.SelectedIndex = 0;
         }
 
@@ -83,8 +85,9 @@ namespace Proyecto_v2
 
             dtInicio.MaxDate = DateTime.Today;
             dtFin.MaxDate = DateTime.Today;
+
             dtInicio.MinDate = DateTime.Today.AddYears(-10);
-            dtFin.MinDate = DateTime.Today.AddYears(-10);
+            dtFin.MinDate = dtInicio.Value;
 
             cbProveedores.Items.Add("Todos");
             cbProveedores.SelectedIndex = 0;
@@ -120,6 +123,20 @@ namespace Proyecto_v2
             dtFin.MinDate = dtInicio.Value;
         }
 
+        private void lbProveedores_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lbProveedores.SelectedIndex != -1)
+            {
+                string cuit = lbProveedores.Text.Split()[0];
+                string nombre_proveedor = datos.ProveedorRazonSocial(cuit);
+
+                if (cbProveedores.Items.Contains(nombre_proveedor))
+                    cbProveedores.SelectedIndex = cbProveedores.Items.IndexOf(nombre_proveedor);
+                else
+                    cbProveedores.SelectedIndex = 0;
+            }
+        }
+
         private void miAgregarProveedor_Click(object sender, EventArgs e)
         {
             FProveedor fCargarProveedor = new FProveedor(datos);
@@ -134,6 +151,9 @@ namespace Proyecto_v2
                     miModificarProveedor.Enabled = true;
                     miEliminarProveedor.Enabled = true;
                     miAgregarProd.Enabled = true;
+
+                    if (datos.CantidadProductos() > 0)
+                        miModificarProd.Enabled = true;
                 }
             }
             else
@@ -203,7 +223,7 @@ namespace Proyecto_v2
                 actualizarCategorias();
                 actualizarProductos();
 
-                if (datos.CantidadProductos() > 0)
+                if (datos.CantidadProductos() == 1)
                 {
                     miModificarProd.Enabled = true;
                     miEliminarProd.Enabled = true;

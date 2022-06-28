@@ -59,7 +59,6 @@ namespace Proyecto_v2
         }
         #endregion
 
-
         #region Eventos
         public FProveedor(Coleccion conexion)
         {
@@ -85,7 +84,7 @@ namespace Proyecto_v2
                 bAceptar.Text = "&Agregar";
                 mtCuit.Text = "";
                 tRazonSocial.Text = "";
-                chNacional.Checked = false;
+                chNacional.Checked = true;
                 mtCuit.Enabled = true;
             }
             else

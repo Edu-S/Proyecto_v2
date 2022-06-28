@@ -58,7 +58,7 @@ namespace Proyecto_v2
             this.mtCuit.Mask = "99-99999999-9";
             this.mtCuit.Name = "mtCuit";
             this.mtCuit.Size = new System.Drawing.Size(111, 20);
-            this.mtCuit.TabIndex = 1;
+            this.mtCuit.TabIndex = 0;
             this.mtCuit.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             this.mtCuit.Validating += new System.ComponentModel.CancelEventHandler(this.mtCuit_Validating);
             // 
@@ -77,7 +77,7 @@ namespace Proyecto_v2
             this.tRazonSocial.MaxLength = 25;
             this.tRazonSocial.Name = "tRazonSocial";
             this.tRazonSocial.Size = new System.Drawing.Size(111, 20);
-            this.tRazonSocial.TabIndex = 3;
+            this.tRazonSocial.TabIndex = 1;
             this.tRazonSocial.Validating += new System.ComponentModel.CancelEventHandler(this.tRazonSocial_Validating);
             // 
             // bAceptar
@@ -85,7 +85,7 @@ namespace Proyecto_v2
             this.bAceptar.Location = new System.Drawing.Point(28, 125);
             this.bAceptar.Name = "bAceptar";
             this.bAceptar.Size = new System.Drawing.Size(103, 23);
-            this.bAceptar.TabIndex = 4;
+            this.bAceptar.TabIndex = 3;
             this.bAceptar.Text = "&Aceptar";
             this.bAceptar.UseVisualStyleBackColor = true;
             this.bAceptar.Click += new System.EventHandler(this.bAceptar_Click);
@@ -96,7 +96,7 @@ namespace Proyecto_v2
             this.bCancelar.Location = new System.Drawing.Point(150, 125);
             this.bCancelar.Name = "bCancelar";
             this.bCancelar.Size = new System.Drawing.Size(106, 23);
-            this.bCancelar.TabIndex = 5;
+            this.bCancelar.TabIndex = 4;
             this.bCancelar.Text = "&Cancelar";
             this.bCancelar.UseVisualStyleBackColor = true;
             // 
@@ -106,7 +106,7 @@ namespace Proyecto_v2
             this.chNacional.Location = new System.Drawing.Point(120, 93);
             this.chNacional.Name = "chNacional";
             this.chNacional.Size = new System.Drawing.Size(68, 17);
-            this.chNacional.TabIndex = 6;
+            this.chNacional.TabIndex = 2;
             this.chNacional.Text = "Nacional";
             this.chNacional.UseVisualStyleBackColor = true;
             // 
@@ -132,8 +132,11 @@ namespace Proyecto_v2
             this.Controls.Add(this.label1);
             this.Controls.Add(this.mtCuit);
             this.Controls.Add(this.lbl_Cuit);
+            this.HelpButton = true;
             this.KeyPreview = true;
+            this.MaximizeBox = false;
             this.Name = "FProveedor";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FProveedor";
             this.Load += new System.EventHandler(this.FProveedor_Load);

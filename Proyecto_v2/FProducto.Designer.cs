@@ -45,8 +45,8 @@ namespace Proyecto_v2
             this.cbProveedor = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.gbTipo = new System.Windows.Forms.GroupBox();
-            this.rbInstrumento = new System.Windows.Forms.RadioButton();
             this.rbAccesorio = new System.Windows.Forms.RadioButton();
+            this.rbInstrumento = new System.Windows.Forms.RadioButton();
             this.epCodigo = new System.Windows.Forms.ErrorProvider(this.components);
             this.epNombre = new System.Windows.Forms.ErrorProvider(this.components);
             this.epPrecio = new System.Windows.Forms.ErrorProvider(this.components);
@@ -61,7 +61,7 @@ namespace Proyecto_v2
             // bCancelar
             // 
             this.bCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.bCancelar.Location = new System.Drawing.Point(139, 237);
+            this.bCancelar.Location = new System.Drawing.Point(132, 242);
             this.bCancelar.Name = "bCancelar";
             this.bCancelar.Size = new System.Drawing.Size(106, 23);
             this.bCancelar.TabIndex = 8;
@@ -70,7 +70,7 @@ namespace Proyecto_v2
             // 
             // bAceptar
             // 
-            this.bAceptar.Location = new System.Drawing.Point(17, 237);
+            this.bAceptar.Location = new System.Drawing.Point(10, 242);
             this.bAceptar.Name = "bAceptar";
             this.bAceptar.Size = new System.Drawing.Size(103, 23);
             this.bAceptar.TabIndex = 7;
@@ -80,7 +80,7 @@ namespace Proyecto_v2
             // 
             // tNombre
             // 
-            this.tNombre.Location = new System.Drawing.Point(132, 86);
+            this.tNombre.Location = new System.Drawing.Point(125, 91);
             this.tNombre.MaxLength = 25;
             this.tNombre.Name = "tNombre";
             this.tNombre.Size = new System.Drawing.Size(111, 20);
@@ -90,7 +90,7 @@ namespace Proyecto_v2
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(65, 170);
+            this.label1.Location = new System.Drawing.Point(23, 175);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(40, 13);
             this.label1.TabIndex = 9;
@@ -99,7 +99,7 @@ namespace Proyecto_v2
             // lblCodigo
             // 
             this.lblCodigo.AutoSize = true;
-            this.lblCodigo.Location = new System.Drawing.Point(94, 15);
+            this.lblCodigo.Location = new System.Drawing.Point(23, 68);
             this.lblCodigo.Name = "lblCodigo";
             this.lblCodigo.Size = new System.Drawing.Size(43, 13);
             this.lblCodigo.TabIndex = 7;
@@ -107,19 +107,20 @@ namespace Proyecto_v2
             // 
             // mtCodigo
             // 
-            this.mtCodigo.Location = new System.Drawing.Point(143, 12);
+            this.mtCodigo.Location = new System.Drawing.Point(125, 65);
             this.mtCodigo.Mask = "0000";
             this.mtCodigo.Name = "mtCodigo";
-            this.mtCodigo.Size = new System.Drawing.Size(41, 20);
+            this.mtCodigo.Size = new System.Drawing.Size(43, 20);
             this.mtCodigo.TabIndex = 0;
             this.mtCodigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.mtCodigo.ValidatingType = typeof(int);
+            this.mtCodigo.Leave += new System.EventHandler(this.mtCodigo_Leave);
             this.mtCodigo.Validating += new System.ComponentModel.CancelEventHandler(this.mtCodigo_Validating);
             // 
             // lNombre
             // 
             this.lNombre.AutoSize = true;
-            this.lNombre.Location = new System.Drawing.Point(65, 89);
+            this.lNombre.Location = new System.Drawing.Point(23, 94);
             this.lNombre.Name = "lNombre";
             this.lNombre.Size = new System.Drawing.Size(47, 13);
             this.lNombre.TabIndex = 15;
@@ -127,8 +128,9 @@ namespace Proyecto_v2
             // 
             // cbCategoria
             // 
+            this.cbCategoria.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cbCategoria.FormattingEnabled = true;
-            this.cbCategoria.Location = new System.Drawing.Point(132, 112);
+            this.cbCategoria.Location = new System.Drawing.Point(125, 117);
             this.cbCategoria.Name = "cbCategoria";
             this.cbCategoria.Size = new System.Drawing.Size(111, 21);
             this.cbCategoria.TabIndex = 3;
@@ -136,7 +138,7 @@ namespace Proyecto_v2
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(65, 115);
+            this.label2.Location = new System.Drawing.Point(23, 120);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(55, 13);
             this.label2.TabIndex = 17;
@@ -145,7 +147,7 @@ namespace Proyecto_v2
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(65, 144);
+            this.label3.Location = new System.Drawing.Point(23, 149);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(40, 13);
             this.label3.TabIndex = 18;
@@ -153,10 +155,10 @@ namespace Proyecto_v2
             // 
             // mtPrecio
             // 
-            this.mtPrecio.Location = new System.Drawing.Point(132, 141);
+            this.mtPrecio.Location = new System.Drawing.Point(125, 146);
             this.mtPrecio.Mask = "99999.99";
             this.mtPrecio.Name = "mtPrecio";
-            this.mtPrecio.Size = new System.Drawing.Size(111, 20);
+            this.mtPrecio.Size = new System.Drawing.Size(62, 20);
             this.mtPrecio.TabIndex = 4;
             this.mtPrecio.ValidatingType = typeof(int);
             this.mtPrecio.Validating += new System.ComponentModel.CancelEventHandler(this.mtPrecio_Validating);
@@ -165,7 +167,7 @@ namespace Proyecto_v2
             // 
             this.dtFecha.CustomFormat = "dd/MM/yyyy";
             this.dtFecha.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtFecha.Location = new System.Drawing.Point(132, 170);
+            this.dtFecha.Location = new System.Drawing.Point(125, 175);
             this.dtFecha.Name = "dtFecha";
             this.dtFecha.Size = new System.Drawing.Size(111, 20);
             this.dtFecha.TabIndex = 5;
@@ -174,7 +176,7 @@ namespace Proyecto_v2
             // 
             this.cbProveedor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbProveedor.FormattingEnabled = true;
-            this.cbProveedor.Location = new System.Drawing.Point(132, 196);
+            this.cbProveedor.Location = new System.Drawing.Point(125, 201);
             this.cbProveedor.Name = "cbProveedor";
             this.cbProveedor.Size = new System.Drawing.Size(111, 21);
             this.cbProveedor.TabIndex = 6;
@@ -183,7 +185,7 @@ namespace Proyecto_v2
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(65, 199);
+            this.label4.Location = new System.Drawing.Point(23, 204);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(59, 13);
             this.label4.TabIndex = 22;
@@ -193,33 +195,32 @@ namespace Proyecto_v2
             // 
             this.gbTipo.Controls.Add(this.rbAccesorio);
             this.gbTipo.Controls.Add(this.rbInstrumento);
-            this.gbTipo.Location = new System.Drawing.Point(48, 32);
+            this.gbTipo.Location = new System.Drawing.Point(10, 11);
             this.gbTipo.Name = "gbTipo";
-            this.gbTipo.Size = new System.Drawing.Size(197, 48);
+            this.gbTipo.Size = new System.Drawing.Size(231, 48);
             this.gbTipo.TabIndex = 23;
             this.gbTipo.TabStop = false;
-            // 
-            // rbInstrumento
-            // 
-            this.rbInstrumento.AutoSize = true;
-            this.rbInstrumento.Checked = true;
-            this.rbInstrumento.Location = new System.Drawing.Point(11, 19);
-            this.rbInstrumento.Name = "rbInstrumento";
-            this.rbInstrumento.Size = new System.Drawing.Size(80, 17);
-            this.rbInstrumento.TabIndex = 0;
-            this.rbInstrumento.TabStop = true;
-            this.rbInstrumento.Text = "Instrumento";
-            this.rbInstrumento.UseVisualStyleBackColor = true;
             // 
             // rbAccesorio
             // 
             this.rbAccesorio.AutoSize = true;
-            this.rbAccesorio.Location = new System.Drawing.Point(113, 20);
+            this.rbAccesorio.Location = new System.Drawing.Point(139, 20);
             this.rbAccesorio.Name = "rbAccesorio";
             this.rbAccesorio.Size = new System.Drawing.Size(72, 17);
             this.rbAccesorio.TabIndex = 1;
             this.rbAccesorio.Text = "Accesorio";
             this.rbAccesorio.UseVisualStyleBackColor = true;
+            // 
+            // rbInstrumento
+            // 
+            this.rbInstrumento.AutoSize = true;
+            this.rbInstrumento.Location = new System.Drawing.Point(15, 19);
+            this.rbInstrumento.Name = "rbInstrumento";
+            this.rbInstrumento.Size = new System.Drawing.Size(80, 17);
+            this.rbInstrumento.TabIndex = 0;
+            this.rbInstrumento.Text = "Instrumento";
+            this.rbInstrumento.UseVisualStyleBackColor = true;
+            this.rbInstrumento.CheckedChanged += new System.EventHandler(this.rbInstrumento_CheckedChanged);
             // 
             // epCodigo
             // 
@@ -243,9 +244,11 @@ namespace Proyecto_v2
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.bCancelar;
-            this.ClientSize = new System.Drawing.Size(282, 283);
+            this.ClientSize = new System.Drawing.Size(264, 282);
             this.Controls.Add(this.gbTipo);
             this.Controls.Add(this.label4);
+            this.Controls.Add(this.lblCodigo);
+            this.Controls.Add(this.mtCodigo);
             this.Controls.Add(this.cbProveedor);
             this.Controls.Add(this.dtFecha);
             this.Controls.Add(this.mtPrecio);
@@ -253,13 +256,14 @@ namespace Proyecto_v2
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cbCategoria);
             this.Controls.Add(this.lNombre);
-            this.Controls.Add(this.mtCodigo);
             this.Controls.Add(this.bCancelar);
             this.Controls.Add(this.bAceptar);
             this.Controls.Add(this.tNombre);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.lblCodigo);
             this.KeyPreview = true;
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(280, 320);
+            this.MinimumSize = new System.Drawing.Size(280, 320);
             this.Name = "FProducto";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Agregar..";
