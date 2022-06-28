@@ -54,6 +54,8 @@ namespace Proyecto_v2
                 cbCategoria.Items.Add(categoria);
 
             cbCategoria.SelectedIndex = 0;
+
+            actualizarProductos();
         }
 
         private void actualizarProductos()
@@ -114,7 +116,6 @@ namespace Proyecto_v2
         private void ActualizarCategoriasProductos(object sender, EventArgs e)
         {
             actualizarCategorias();
-            actualizarProductos();
         }
 
         private void dtInicio_ValueChanged(object sender, EventArgs e)
@@ -221,7 +222,6 @@ namespace Proyecto_v2
                 MessageBox.Show("Se agrego un nuevo producto", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 actualizarCategorias();
-                actualizarProductos();
 
                 if (datos.CantidadProductos() == 1)
                 {
@@ -244,9 +244,7 @@ namespace Proyecto_v2
                 if (fCargarProducto.DialogResult == DialogResult.OK)
                 {
                     MessageBox.Show("Se modifico el producto", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
                     actualizarCategorias();
-                    actualizarProductos();
                 }
                 else
                     MessageBox.Show("Modificar producto cancelado", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -290,7 +288,10 @@ namespace Proyecto_v2
 
         private void msiAcercaDe_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Desarrolladores: Eduardo Sanhueza y Fiorella Rossi");
+            string mensaje = "Programa realizado como proyecto de la materia";
+            mensaje += "\nDiseño y Desarrollo de la Programación Administrativa\n";
+            mensaje += "\nDesarrolladores: Eduardo Sanhueza y Fiorella Rossi";
+            MessageBox.Show(mensaje);
         }
 
         private void msiSalir_Click(object sender, EventArgs e)

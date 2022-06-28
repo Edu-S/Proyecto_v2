@@ -12,10 +12,25 @@ namespace Proyecto_v2
 {
     public partial class FProducto : Form
     {
+        #region Variables Globales
         Coleccion datos;
         bool agregarProducto;
         int codigo;
+        #endregion
 
+        #region Métodos Propios
+        private void actualizarCategorias()
+        {
+            string selecTipo = (rbInstrumento.Checked) ? "Instrumentos" : "Accesorios";
+            List<string> listaCategorias = datos.ProductoCategorias(selecTipo);
+
+            cbCategoria.Items.Clear();
+            foreach (string categoria in listaCategorias)
+                cbCategoria.Items.Add(categoria);
+        }
+        #endregion
+
+        #region Eventos
         public FProducto(Coleccion conexion)
         {
             InitializeComponent();
@@ -79,6 +94,46 @@ namespace Proyecto_v2
             }
         }
 
+        private void cbProveedor_Validating(object sender, CancelEventArgs e)
+        {
+            epProveedor.Clear();
+            if (cbProveedor.Text.Trim() == "")
+                epProveedor.SetError(cbProveedor, "Ingresar Proveedor");
+        }
+
+        private void rbInstrumento_CheckedChanged(object sender, EventArgs e)
+        {
+            actualizarCategorias();
+        }
+
+        // Autocompleta el código ingresado por el usuario en el formulario
+        private void mtCodigo_Leave(object sender, EventArgs e)
+        {
+            if (mtCodigo.Text.Trim() != "")
+                mtCodigo.Text = Convert.ToInt32(mtCodigo.Text).ToString("0000");
+        }
+        
+        private void mtCodigo_Validating(object sender, CancelEventArgs e)
+        {
+            epCodigo.Clear();
+            if (mtCodigo.Text.Trim() == "")
+                epCodigo.SetError(mtCodigo, "Ingresar código");
+        }
+
+        private void tNombre_Validating(object sender, CancelEventArgs e)
+        {
+            epNombre.Clear();
+            if (tNombre.Text.Trim() == "")
+                epNombre.SetError(tNombre, "Ingresar nombre");
+        }
+
+        private void mtPrecio_Validating(object sender, CancelEventArgs e)
+        {
+            epPrecio.Clear();
+            if (mtPrecio.Text.Trim() == ".")
+                epPrecio.SetError(mtPrecio, "Ingresar precio");
+        }
+
         private void bAceptar_Click(object sender, EventArgs e)
         {
             int nuevoCodigo = (mtCodigo.MaskFull) ? Convert.ToInt32(mtCodigo.Text) : 0;
@@ -131,54 +186,6 @@ namespace Proyecto_v2
                 DialogResult = DialogResult.OK;
             }
         }
-
-        private void mtCodigo_Validating(object sender, CancelEventArgs e)
-        {
-            epCodigo.Clear();
-            if (mtCodigo.Text.Trim() == "")
-                epCodigo.SetError(mtCodigo,"Ingresar código");
-        }
-
-        private void tNombre_Validating(object sender, CancelEventArgs e)
-        {
-            epNombre.Clear();
-            if (tNombre.Text.Trim() == "")
-                epNombre.SetError(tNombre,"Ingresar nombre");
-        }
-
-        private void mtPrecio_Validating(object sender, CancelEventArgs e)
-        {
-            epPrecio.Clear();
-            if (mtPrecio.Text.Trim() == ".")
-                epPrecio.SetError(mtPrecio, "Ingresar precio");
-        }
-
-        private void cbProveedor_Validating(object sender, CancelEventArgs e)
-        {
-            epProveedor.Clear();
-            if (cbProveedor.Text.Trim() == "")
-                epProveedor.SetError(cbProveedor, "Ingresar Proveedor");
-        }
-
-        private void actualizarCategorias()
-        {
-            string selecTipo = (rbInstrumento.Checked) ? "Instrumentos" : "Accesorios";
-            List<string> listaCategorias = datos.ProductoCategorias(selecTipo);
-
-            cbCategoria.Items.Clear();
-            foreach (string categoria in listaCategorias)
-                cbCategoria.Items.Add(categoria);
-        }
-
-        private void rbInstrumento_CheckedChanged(object sender, EventArgs e)
-        {
-            actualizarCategorias();
-        }
-
-        private void mtCodigo_Leave(object sender, EventArgs e)
-        {
-            if (mtCodigo.Text.Trim() != "")
-                mtCodigo.Text = Convert.ToInt32(mtCodigo.Text).ToString("0000");
-        }
+        #endregion
     }
 }

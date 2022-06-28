@@ -61,7 +61,7 @@ namespace Proyecto_v2
             // bCancelar
             // 
             this.bCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.bCancelar.Location = new System.Drawing.Point(132, 242);
+            this.bCancelar.Location = new System.Drawing.Point(141, 242);
             this.bCancelar.Name = "bCancelar";
             this.bCancelar.Size = new System.Drawing.Size(106, 23);
             this.bCancelar.TabIndex = 8;
@@ -265,6 +265,7 @@ namespace Proyecto_v2
             this.MaximumSize = new System.Drawing.Size(280, 320);
             this.MinimumSize = new System.Drawing.Size(280, 320);
             this.Name = "FProducto";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Agregar..";
             this.Load += new System.EventHandler(this.FProducto_Load);

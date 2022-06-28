@@ -447,6 +447,7 @@ namespace Proyecto_v2
             this.MaximumSize = new System.Drawing.Size(800, 500);
             this.MinimumSize = new System.Drawing.Size(800, 500);
             this.Name = "FPrincipal";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Instrumentos Musicales";
             this.msPrincipal.ResumeLayout(false);

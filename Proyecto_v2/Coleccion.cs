@@ -234,7 +234,6 @@ namespace Proyecto_v2
                 if (filtroTipoOk && filtroCatOk && filtroProvOk && filtroFechaOk)
                     listado.Add(producto.ToString());
             }
-
             return listado;
         }
         #endregion
@@ -416,8 +415,23 @@ namespace Proyecto_v2
         {
             Proveedor proveedor = new Proveedor(cuit_proveedor);
             int posicion = listaProveedores.IndexOf(proveedor);
+
             if (posicion >= 0)
+            {
+                //// Elimina todos los productos con el proveedor a eliminar
+                //List<Producto> lista = new List<Producto>();
+                //foreach (Producto prod in listaProductos)
+                //    if (prod.proveedor.Equals(proveedor))
+                //        lista.Add(prod);
+                //foreach (Producto prod in lista)
+                //    listaProductos.Remove(prod);
+
+                foreach (Producto prod in listaProductos)
+                    if (prod.proveedor.Equals(proveedor))
+                        prod.proveedor = new Proveedor();
+
                 listaProveedores.RemoveAt(posicion);
+            }
         }
         #endregion
 
