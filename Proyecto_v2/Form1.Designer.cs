@@ -35,17 +35,15 @@ namespace Proyecto_v2
             this.miModificarProveedor = new System.Windows.Forms.ToolStripMenuItem();
             this.miEliminarProveedor = new System.Windows.Forms.ToolStripMenuItem();
             this.msiProductos = new System.Windows.Forms.ToolStripMenuItem();
-            this.instrumentosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.miAgregarIntrumento = new System.Windows.Forms.ToolStripMenuItem();
-            this.miModificarInstrumento = new System.Windows.Forms.ToolStripMenuItem();
-            this.miEliminarInstrumento = new System.Windows.Forms.ToolStripMenuItem();
-            this.accesoriosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.miAgregarAccesorio = new System.Windows.Forms.ToolStripMenuItem();
-            this.miModificarAccesorio = new System.Windows.Forms.ToolStripMenuItem();
-            this.miEliminarAccesorio = new System.Windows.Forms.ToolStripMenuItem();
+            this.msiAgregarProd = new System.Windows.Forms.ToolStripMenuItem();
+            this.msiModificarProd = new System.Windows.Forms.ToolStripMenuItem();
+            this.msiEliminarProd = new System.Windows.Forms.ToolStripMenuItem();
             this.msiAcercaDe = new System.Windows.Forms.ToolStripMenuItem();
             this.msiSalir = new System.Windows.Forms.ToolStripMenuItem();
             this.pProductos = new System.Windows.Forms.Panel();
+            this.lCantProdLista = new System.Windows.Forms.Label();
+            this.cbProveedores = new System.Windows.Forms.ComboBox();
+            this.lTotalProductos = new System.Windows.Forms.Label();
             this.lFin = new System.Windows.Forms.Label();
             this.lInicio = new System.Windows.Forms.Label();
             this.dtFin = new System.Windows.Forms.DateTimePicker();
@@ -56,11 +54,12 @@ namespace Proyecto_v2
             this.rbTodosProd = new System.Windows.Forms.RadioButton();
             this.lbProductos = new System.Windows.Forms.ListBox();
             this.pProveedores = new System.Windows.Forms.Panel();
+            this.lCantProvLista = new System.Windows.Forms.Label();
+            this.lTotalProveedores = new System.Windows.Forms.Label();
             this.rbTodosProv = new System.Windows.Forms.RadioButton();
             this.rbNacionales = new System.Windows.Forms.RadioButton();
             this.rbExtranjeros = new System.Windows.Forms.RadioButton();
             this.lbProveedores = new System.Windows.Forms.ListBox();
-            this.cbProveedores = new System.Windows.Forms.ComboBox();
             this.msPrincipal.SuspendLayout();
             this.pProductos.SuspendLayout();
             this.pProveedores.SuspendLayout();
@@ -86,6 +85,7 @@ namespace Proyecto_v2
             this.miModificarProveedor,
             this.miEliminarProveedor});
             this.msiProveedores.Name = "msiProveedores";
+            this.msiProveedores.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.V)));
             this.msiProveedores.Size = new System.Drawing.Size(84, 20);
             this.msiProveedores.Text = "Proveedores";
             // 
@@ -93,7 +93,7 @@ namespace Proyecto_v2
             // 
             this.miAgregarProveedor.Name = "miAgregarProveedor";
             this.miAgregarProveedor.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.A)));
-            this.miAgregarProveedor.Size = new System.Drawing.Size(166, 22);
+            this.miAgregarProveedor.Size = new System.Drawing.Size(180, 22);
             this.miAgregarProveedor.Text = "Agregar";
             this.miAgregarProveedor.Click += new System.EventHandler(this.miAgregarProveedor_Click);
             // 
@@ -101,7 +101,7 @@ namespace Proyecto_v2
             // 
             this.miModificarProveedor.Name = "miModificarProveedor";
             this.miModificarProveedor.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.M)));
-            this.miModificarProveedor.Size = new System.Drawing.Size(166, 22);
+            this.miModificarProveedor.Size = new System.Drawing.Size(180, 22);
             this.miModificarProveedor.Text = "Modificar";
             this.miModificarProveedor.Click += new System.EventHandler(this.miModificarProveedor_Click);
             // 
@@ -109,86 +109,41 @@ namespace Proyecto_v2
             // 
             this.miEliminarProveedor.Name = "miEliminarProveedor";
             this.miEliminarProveedor.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.E)));
-            this.miEliminarProveedor.Size = new System.Drawing.Size(166, 22);
+            this.miEliminarProveedor.Size = new System.Drawing.Size(180, 22);
             this.miEliminarProveedor.Text = "Eliminar";
             this.miEliminarProveedor.Click += new System.EventHandler(this.miEliminarProveedor_Click);
             // 
             // msiProductos
             // 
             this.msiProductos.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.instrumentosToolStripMenuItem,
-            this.accesoriosToolStripMenuItem});
+            this.msiAgregarProd,
+            this.msiModificarProd,
+            this.msiEliminarProd});
             this.msiProductos.Name = "msiProductos";
+            this.msiProductos.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.D)));
             this.msiProductos.Size = new System.Drawing.Size(73, 20);
             this.msiProductos.Text = "Productos";
             // 
-            // instrumentosToolStripMenuItem
+            // msiAgregarProd
             // 
-            this.instrumentosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.miAgregarIntrumento,
-            this.miModificarInstrumento,
-            this.miEliminarInstrumento});
-            this.instrumentosToolStripMenuItem.Name = "instrumentosToolStripMenuItem";
-            this.instrumentosToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
-            this.instrumentosToolStripMenuItem.Text = "Instrumentos";
+            this.msiAgregarProd.Name = "msiAgregarProd";
+            this.msiAgregarProd.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.B)));
+            this.msiAgregarProd.Size = new System.Drawing.Size(180, 22);
+            this.msiAgregarProd.Text = "Agregar";
             // 
-            // miAgregarIntrumento
+            // msiModificarProd
             // 
-            this.miAgregarIntrumento.Name = "miAgregarIntrumento";
-            this.miAgregarIntrumento.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.A)));
-            this.miAgregarIntrumento.Size = new System.Drawing.Size(166, 22);
-            this.miAgregarIntrumento.Text = "Agregar";
-            this.miAgregarIntrumento.Click += new System.EventHandler(this.miAgregarIntrumento_Click);
+            this.msiModificarProd.Name = "msiModificarProd";
+            this.msiModificarProd.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.N)));
+            this.msiModificarProd.Size = new System.Drawing.Size(180, 22);
+            this.msiModificarProd.Text = "Modificar";
             // 
-            // miModificarInstrumento
+            // msiEliminarProd
             // 
-            this.miModificarInstrumento.Name = "miModificarInstrumento";
-            this.miModificarInstrumento.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.M)));
-            this.miModificarInstrumento.Size = new System.Drawing.Size(166, 22);
-            this.miModificarInstrumento.Text = "Modificar";
-            this.miModificarInstrumento.Click += new System.EventHandler(this.miModificarInstrumento_Click);
-            // 
-            // miEliminarInstrumento
-            // 
-            this.miEliminarInstrumento.Name = "miEliminarInstrumento";
-            this.miEliminarInstrumento.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.E)));
-            this.miEliminarInstrumento.Size = new System.Drawing.Size(166, 22);
-            this.miEliminarInstrumento.Text = "Eliminar";
-            this.miEliminarInstrumento.Click += new System.EventHandler(this.miEliminarInstrumento_Click);
-            // 
-            // accesoriosToolStripMenuItem
-            // 
-            this.accesoriosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.miAgregarAccesorio,
-            this.miModificarAccesorio,
-            this.miEliminarAccesorio});
-            this.accesoriosToolStripMenuItem.Name = "accesoriosToolStripMenuItem";
-            this.accesoriosToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
-            this.accesoriosToolStripMenuItem.Text = "Accesorios";
-            // 
-            // miAgregarAccesorio
-            // 
-            this.miAgregarAccesorio.Name = "miAgregarAccesorio";
-            this.miAgregarAccesorio.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.A)));
-            this.miAgregarAccesorio.Size = new System.Drawing.Size(166, 22);
-            this.miAgregarAccesorio.Text = "Agregar";
-            this.miAgregarAccesorio.Click += new System.EventHandler(this.miAgregarAccesorio_Click);
-            // 
-            // miModificarAccesorio
-            // 
-            this.miModificarAccesorio.Name = "miModificarAccesorio";
-            this.miModificarAccesorio.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.M)));
-            this.miModificarAccesorio.Size = new System.Drawing.Size(166, 22);
-            this.miModificarAccesorio.Text = "Modificar";
-            this.miModificarAccesorio.Click += new System.EventHandler(this.miModificarAccesorio_Click);
-            // 
-            // miEliminarAccesorio
-            // 
-            this.miEliminarAccesorio.Name = "miEliminarAccesorio";
-            this.miEliminarAccesorio.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.E)));
-            this.miEliminarAccesorio.Size = new System.Drawing.Size(166, 22);
-            this.miEliminarAccesorio.Text = "Eliminar";
-            this.miEliminarAccesorio.Click += new System.EventHandler(this.miEliminarAccesorio_Click);
+            this.msiEliminarProd.Name = "msiEliminarProd";
+            this.msiEliminarProd.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F)));
+            this.msiEliminarProd.Size = new System.Drawing.Size(180, 22);
+            this.msiEliminarProd.Text = "Eliminar";
             // 
             // msiAcercaDe
             // 
@@ -208,7 +163,9 @@ namespace Proyecto_v2
             // 
             // pProductos
             // 
+            this.pProductos.Controls.Add(this.lCantProdLista);
             this.pProductos.Controls.Add(this.cbProveedores);
+            this.pProductos.Controls.Add(this.lTotalProductos);
             this.pProductos.Controls.Add(this.lFin);
             this.pProductos.Controls.Add(this.lInicio);
             this.pProductos.Controls.Add(this.dtFin);
@@ -222,6 +179,35 @@ namespace Proyecto_v2
             this.pProductos.Name = "pProductos";
             this.pProductos.Size = new System.Drawing.Size(344, 422);
             this.pProductos.TabIndex = 1;
+            // 
+            // lCantProdLista
+            // 
+            this.lCantProdLista.AutoSize = true;
+            this.lCantProdLista.Location = new System.Drawing.Point(27, 377);
+            this.lCantProdLista.Name = "lCantProdLista";
+            this.lCantProdLista.Size = new System.Drawing.Size(173, 13);
+            this.lCantProdLista.TabIndex = 10;
+            this.lCantProdLista.Text = "Cantidad de productos en la lista: 0";
+            // 
+            // cbProveedores
+            // 
+            this.cbProveedores.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbProveedores.FormattingEnabled = true;
+            this.cbProveedores.Items.AddRange(new object[] {
+            "Todos"});
+            this.cbProveedores.Location = new System.Drawing.Point(223, 31);
+            this.cbProveedores.Name = "cbProveedores";
+            this.cbProveedores.Size = new System.Drawing.Size(97, 21);
+            this.cbProveedores.TabIndex = 9;
+            // 
+            // lTotalProductos
+            // 
+            this.lTotalProductos.AutoSize = true;
+            this.lTotalProductos.Location = new System.Drawing.Point(28, 397);
+            this.lTotalProductos.Name = "lTotalProductos";
+            this.lTotalProductos.Size = new System.Drawing.Size(149, 13);
+            this.lTotalProductos.TabIndex = 9;
+            this.lTotalProductos.Text = "Cantidad total de productos: 0";
             // 
             // lFin
             // 
@@ -314,6 +300,8 @@ namespace Proyecto_v2
             // 
             // pProveedores
             // 
+            this.pProveedores.Controls.Add(this.lCantProvLista);
+            this.pProveedores.Controls.Add(this.lTotalProveedores);
             this.pProveedores.Controls.Add(this.rbTodosProv);
             this.pProveedores.Controls.Add(this.rbNacionales);
             this.pProveedores.Controls.Add(this.rbExtranjeros);
@@ -322,6 +310,24 @@ namespace Proyecto_v2
             this.pProveedores.Name = "pProveedores";
             this.pProveedores.Size = new System.Drawing.Size(350, 422);
             this.pProveedores.TabIndex = 2;
+            // 
+            // lCantProvLista
+            // 
+            this.lCantProvLista.AutoSize = true;
+            this.lCantProvLista.Location = new System.Drawing.Point(24, 378);
+            this.lCantProvLista.Name = "lCantProvLista";
+            this.lCantProvLista.Size = new System.Drawing.Size(185, 13);
+            this.lCantProvLista.TabIndex = 8;
+            this.lCantProvLista.Text = "Cantidad de proveedores en la lista: 0";
+            // 
+            // lTotalProveedores
+            // 
+            this.lTotalProveedores.AutoSize = true;
+            this.lTotalProveedores.Location = new System.Drawing.Point(25, 398);
+            this.lTotalProveedores.Name = "lTotalProveedores";
+            this.lTotalProveedores.Size = new System.Drawing.Size(161, 13);
+            this.lTotalProveedores.TabIndex = 7;
+            this.lTotalProveedores.Text = "Cantidad total de proveedores: 0";
             // 
             // rbTodosProv
             // 
@@ -367,15 +373,6 @@ namespace Proyecto_v2
             this.lbProveedores.Size = new System.Drawing.Size(297, 264);
             this.lbProveedores.TabIndex = 1;
             // 
-            // cbProveedores
-            // 
-            this.cbProveedores.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbProveedores.FormattingEnabled = true;
-            this.cbProveedores.Location = new System.Drawing.Point(223, 31);
-            this.cbProveedores.Name = "cbProveedores";
-            this.cbProveedores.Size = new System.Drawing.Size(97, 21);
-            this.cbProveedores.TabIndex = 9;
-            // 
             // FPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -409,14 +406,6 @@ namespace Proyecto_v2
         private System.Windows.Forms.ToolStripMenuItem msiSalir;
         private System.Windows.Forms.ToolStripMenuItem miModificarProveedor;
         private System.Windows.Forms.ToolStripMenuItem miEliminarProveedor;
-        private System.Windows.Forms.ToolStripMenuItem instrumentosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem miAgregarIntrumento;
-        private System.Windows.Forms.ToolStripMenuItem miModificarInstrumento;
-        private System.Windows.Forms.ToolStripMenuItem miEliminarInstrumento;
-        private System.Windows.Forms.ToolStripMenuItem accesoriosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem miAgregarAccesorio;
-        private System.Windows.Forms.ToolStripMenuItem miModificarAccesorio;
-        private System.Windows.Forms.ToolStripMenuItem miEliminarAccesorio;
         private System.Windows.Forms.Panel pProductos;
         private System.Windows.Forms.Label lFin;
         private System.Windows.Forms.Label lInicio;
@@ -433,6 +422,13 @@ namespace Proyecto_v2
         private System.Windows.Forms.RadioButton rbExtranjeros;
         private System.Windows.Forms.ListBox lbProveedores;
         private System.Windows.Forms.ComboBox cbProveedores;
+        private System.Windows.Forms.Label lCantProvLista;
+        private System.Windows.Forms.Label lTotalProveedores;
+        private System.Windows.Forms.Label lCantProdLista;
+        private System.Windows.Forms.Label lTotalProductos;
+        private System.Windows.Forms.ToolStripMenuItem msiAgregarProd;
+        private System.Windows.Forms.ToolStripMenuItem msiModificarProd;
+        private System.Windows.Forms.ToolStripMenuItem msiEliminarProd;
     }
 }
 

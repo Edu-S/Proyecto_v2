@@ -37,6 +37,9 @@ namespace Proyecto_v2
             lbProveedores.Items.Clear();
             foreach (string dato in lista)
                 lbProveedores.Items.Add(dato);
+
+            lCantProvLista.Text = "Cantidad de proveedores en la lista: " + lbProveedores.Items.Count;
+            lTotalProveedores.Text = "Cantidad total de proveedores: " + datos.CantidadProveedores();
         }
 
         private void actualizarProductos()
@@ -54,6 +57,9 @@ namespace Proyecto_v2
             lbProductos.Items.Clear();
             foreach (string s in lista)
                 lbProductos.Items.Add(s);
+
+            lCantProdLista.Text = "Cantidad de productos en la lista: " + lbProductos.Items.Count;
+            lTotalProductos.Text = "Cantidad total de productos: " + datos.CantidadProductos();
         }
         #endregion
 
@@ -62,10 +68,13 @@ namespace Proyecto_v2
         {
             InitializeComponent();
             datos = new Coleccion();
+            
             dtInicio.MaxDate = DateTime.Today;
             dtFin.MaxDate = DateTime.Today;
             dtInicio.MinDate = DateTime.Today.AddYears(-10);
             dtFin.MinDate = DateTime.Today.AddYears(-10);
+
+            cbProveedores.SelectedIndex = 0;
         }
 
         private void miAgregarProveedor_Click(object sender, EventArgs e)
@@ -84,68 +93,50 @@ namespace Proyecto_v2
 
         private void miModificarProveedor_Click(object sender, EventArgs e)
         {
-            string cuit_proveedor = "";
-            FProveedor fCargarProveedor = new FProveedor(datos,cuit_proveedor);
-            fCargarProveedor.ShowDialog();
-
-            if (fCargarProveedor.DialogResult == DialogResult.OK)
+            if (lbProveedores.SelectedIndex != -1)
             {
-                MessageBox.Show("Se modificó el proveedor", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                actualizarProveedores();
+                string cuit_proveedor = lbProveedores.Text.Split()[0];
+
+                FProveedor fCargarProveedor = new FProveedor(datos, cuit_proveedor);
+                fCargarProveedor.ShowDialog();
+
+                if (fCargarProveedor.DialogResult == DialogResult.OK)
+                {
+                    MessageBox.Show("Se modificó el proveedor", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    actualizarProveedores();
+                }
+                else
+                    MessageBox.Show("Se canceló modificar proveedor", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
-                MessageBox.Show("Se canceló modificar proveedor", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Debe seleccionar un proveedor de la lista","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
         }
 
         private void miEliminarProveedor_Click(object sender, EventArgs e)
         {
-            string cuit_proveedor = "";
-            DialogResult respuesta = MessageBox.Show("¿Está seguro que quiere eliminar el proveedor?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if(respuesta == DialogResult.Yes)
+            if(lbProveedores.SelectedIndex != -1)
             {
-                datos.EliminarProveedor(cuit_proveedor);
-                MessageBox.Show("Se eliminó el proveedor", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                actualizarProveedores();
-                actualizarProductos();
+                string cuit_proveedor = lbProveedores.Text.Split()[0];
+
+                DialogResult respuesta = MessageBox.Show("¿Está seguro que quiere eliminar el proveedor?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if(respuesta == DialogResult.Yes)
+                {
+                    datos.EliminarProveedor(cuit_proveedor);
+                    MessageBox.Show("Se eliminó el proveedor", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    actualizarProveedores();
+                    actualizarProductos();
+                }
+                else
+                    MessageBox.Show("Eliminar proveedor cancelado", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
-                MessageBox.Show("Eliminar proveedor cancelado", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
-        private void miAgregarIntrumento_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void miModificarInstrumento_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void miEliminarInstrumento_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void miAgregarAccesorio_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void miModificarAccesorio_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void miEliminarAccesorio_Click(object sender, EventArgs e)
-        {
-
+                MessageBox.Show("Debe seleccionar un proveedor de la lista", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void msiAcercaDe_Click(object sender, EventArgs e)
         {
-
+            MessageBox.Show("Desarrolladores: Eduardo Sanhueza y Fiorella Rossi");
         }
 
         private void msiSalir_Click(object sender, EventArgs e)
