@@ -149,8 +149,8 @@ namespace Proyecto_v2
             // 
             this.msiAcercaDe.Name = "msiAcercaDe";
             this.msiAcercaDe.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.msiAcercaDe.Size = new System.Drawing.Size(72, 20);
-            this.msiAcercaDe.Text = "Acerca De";
+            this.msiAcercaDe.Size = new System.Drawing.Size(71, 20);
+            this.msiAcercaDe.Text = "Acerca de";
             this.msiAcercaDe.Click += new System.EventHandler(this.msiAcercaDe_Click);
             // 
             // msiSalir
