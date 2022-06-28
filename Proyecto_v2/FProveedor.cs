@@ -13,10 +13,54 @@ namespace Proyecto_v2
 {
     public partial class FProveedor : Form
     {
+        #region Variables
         Coleccion datos;
         bool agregaProveedor;
         string cuit_actual;
+        #endregion
+        
+        #region Métodos Propios
+        private int ObtenerCodigoVerificador(string cuit)
+        {
+            int nro_actual, codigo, resto, suma = 0;
 
+            for(int indice = 0; indice <= 9; indice++)
+            {
+                codigo = (9 - indice) % 6 + 2;
+                nro_actual = Convert.ToInt32(cuit.Substring(indice, 1));
+
+                suma += codigo * nro_actual;
+            }
+
+            resto = suma % 11;
+            return (resto == 0) ? 0 : (resto == 1) ? 9 : 11 - resto;
+        }
+
+        private bool esCuitValido(string cuit)
+        {
+            int codigo = Convert.ToInt32(cuit.Substring(10, 1));
+            return tipoCuitValido(cuit) && ObtenerCodigoVerificador(cuit) == codigo; ;
+        }
+
+        private bool tipoCuitValido(string cuit)
+        {
+            bool esValido = false;
+            int tipo = Convert.ToInt32(cuit.Substring(0, 2));
+
+            switch (tipo)
+            {
+                case 20: case 23: case 24:
+                case 25: case 26: case 27:
+                case 30: case 33: case 34:
+                    esValido = true;
+                    break;
+            }
+            return esValido;
+        }
+        #endregion
+
+
+        #region Eventos
         public FProveedor(Coleccion conexion)
         {
             InitializeComponent();
@@ -54,48 +98,24 @@ namespace Proyecto_v2
                 chNacional.Checked = datos.ProveedorEsNacional(cuit_actual);
             }
         }
-        
-        #region Métodos Propios
-        private int ObtenerCodigoVerificador(string cuit)
+
+        private void mtCuit_Validating(object sender, CancelEventArgs e)
         {
-            int nro_actual, codigo, resto, suma = 0;
-
-            for(int indice = 0; indice <= 9; indice++)
-            {
-                codigo = (9 - indice) % 6 + 2;
-                nro_actual = Convert.ToInt32(cuit.Substring(indice, 1));
-
-                suma += codigo * nro_actual;
-            }
-
-            resto = suma % 11;
-            return (resto == 0) ? 0 : (resto == 1) ? 9 : 11 - resto;
+            epCUIT.Clear();
+            if (!mtCuit.MaskFull)
+                epCUIT.SetError(mtCuit, "Debe ingresar un número de CUIT");
+            else if (!tipoCuitValido(mtCuit.Text))
+                epCUIT.SetError(mtCuit, "Tipo de CUIT no válido");
+            else if (!esCuitValido(mtCuit.Text))
+                epCUIT.SetError(mtCuit, "CUIT no válido, el código es " + ObtenerCodigoVerificador(mtCuit.Text));
         }
 
-        private bool esCuitValido(string cuit)
+        private void tRazonSocial_Validating(object sender, CancelEventArgs e)
         {
-            bool esValido = false;
-            int tipo = Convert.ToInt32(cuit.Substring(0, 2));
-            
-            switch (tipo)
-            {
-                case 20:
-                case 23:
-                case 24:
-                case 25:
-                case 26:
-                case 27: // Persona Física
-                case 30:
-                case 33:
-                case 34: // Persona Jurídica
-                    int codigo = Convert.ToInt32(cuit.Substring(10, 1));
-                    esValido = ObtenerCodigoVerificador(cuit) == codigo;
-                    break;
-            }
-            
-            return esValido;
+            epRazon.Clear();
+            if (tRazonSocial.Text.Trim() == "")
+                epRazon.SetError(tRazonSocial, "Ingresar una razón social");
         }
-        #endregion
 
         private void bAceptar_Click(object sender, EventArgs e)
         {
@@ -108,10 +128,14 @@ namespace Proyecto_v2
                 MessageBox.Show("Falta completar CUIT.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 mtCuit.Focus();
             }
+            else if (!tipoCuitValido(nuevoCuit))
+            {
+                MessageBox.Show("El tipo de CUIT no válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mtCuit.Focus();
+            }
             else if (!esCuitValido(nuevoCuit))
             {
                 MessageBox.Show("El CUIT ingresado no es válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                MessageBox.Show("Posible codigo de verificación es " + ObtenerCodigoVerificador(nuevoCuit),"Ayuda",MessageBoxButtons.OK,MessageBoxIcon.Information);
                 mtCuit.Focus();
             }
             else if (nuevaRazon == "")
@@ -152,5 +176,6 @@ namespace Proyecto_v2
                 }
             }
         }
+        #endregion
     }
 }

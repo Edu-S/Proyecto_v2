@@ -29,6 +29,7 @@ namespace Proyecto_v2
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lbl_Cuit = new System.Windows.Forms.Label();
             this.mtCuit = new System.Windows.Forms.MaskedTextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -36,6 +37,10 @@ namespace Proyecto_v2
             this.bAceptar = new System.Windows.Forms.Button();
             this.bCancelar = new System.Windows.Forms.Button();
             this.chNacional = new System.Windows.Forms.CheckBox();
+            this.epCUIT = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epRazon = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.epCUIT)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epRazon)).BeginInit();
             this.SuspendLayout();
             // 
             // lbl_Cuit
@@ -55,6 +60,7 @@ namespace Proyecto_v2
             this.mtCuit.Size = new System.Drawing.Size(111, 20);
             this.mtCuit.TabIndex = 1;
             this.mtCuit.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
+            this.mtCuit.Validating += new System.ComponentModel.CancelEventHandler(this.mtCuit_Validating);
             // 
             // label1
             // 
@@ -72,6 +78,7 @@ namespace Proyecto_v2
             this.tRazonSocial.Name = "tRazonSocial";
             this.tRazonSocial.Size = new System.Drawing.Size(111, 20);
             this.tRazonSocial.TabIndex = 3;
+            this.tRazonSocial.Validating += new System.ComponentModel.CancelEventHandler(this.tRazonSocial_Validating);
             // 
             // bAceptar
             // 
@@ -103,6 +110,14 @@ namespace Proyecto_v2
             this.chNacional.Text = "Nacional";
             this.chNacional.UseVisualStyleBackColor = true;
             // 
+            // epCUIT
+            // 
+            this.epCUIT.ContainerControl = this;
+            // 
+            // epRazon
+            // 
+            this.epRazon.ContainerControl = this;
+            // 
             // FProveedor
             // 
             this.AcceptButton = this.bAceptar;
@@ -122,6 +137,8 @@ namespace Proyecto_v2
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FProveedor";
             this.Load += new System.EventHandler(this.FProveedor_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.epCUIT)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epRazon)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -136,5 +153,7 @@ namespace Proyecto_v2
         private System.Windows.Forms.Button bAceptar;
         private System.Windows.Forms.Button bCancelar;
         private System.Windows.Forms.CheckBox chNacional;
+        private System.Windows.Forms.ErrorProvider epCUIT;
+        private System.Windows.Forms.ErrorProvider epRazon;
     }
 }
