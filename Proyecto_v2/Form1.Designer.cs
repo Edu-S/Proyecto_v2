@@ -196,7 +196,7 @@ namespace Proyecto_v2
             // 
             this.rbTodosProd.AutoSize = true;
             this.rbTodosProd.Checked = true;
-            this.rbTodosProd.Location = new System.Drawing.Point(30, 108);
+            this.rbTodosProd.Location = new System.Drawing.Point(30, 101);
             this.rbTodosProd.Name = "rbTodosProd";
             this.rbTodosProd.Size = new System.Drawing.Size(55, 17);
             this.rbTodosProd.TabIndex = 1;
@@ -208,7 +208,7 @@ namespace Proyecto_v2
             // rbInstrumentos
             // 
             this.rbInstrumentos.AutoSize = true;
-            this.rbInstrumentos.Location = new System.Drawing.Point(184, 108);
+            this.rbInstrumentos.Location = new System.Drawing.Point(184, 101);
             this.rbInstrumentos.Name = "rbInstrumentos";
             this.rbInstrumentos.Size = new System.Drawing.Size(85, 17);
             this.rbInstrumentos.TabIndex = 2;
@@ -220,13 +220,14 @@ namespace Proyecto_v2
             // rbAccesorios
             // 
             this.rbAccesorios.AutoSize = true;
-            this.rbAccesorios.Location = new System.Drawing.Point(356, 108);
+            this.rbAccesorios.Location = new System.Drawing.Point(356, 101);
             this.rbAccesorios.Name = "rbAccesorios";
             this.rbAccesorios.Size = new System.Drawing.Size(77, 17);
             this.rbAccesorios.TabIndex = 3;
             this.rbAccesorios.TabStop = true;
             this.rbAccesorios.Text = "Accesorios";
             this.rbAccesorios.UseVisualStyleBackColor = true;
+            this.rbAccesorios.CheckedChanged += new System.EventHandler(this.ActualizarCategoriasProductos);
             // 
             // gbFiltros
             // 
@@ -276,7 +277,7 @@ namespace Proyecto_v2
             this.cbProveedores.Name = "cbProveedores";
             this.cbProveedores.Size = new System.Drawing.Size(119, 21);
             this.cbProveedores.TabIndex = 9;
-            this.cbProveedores.SelectedIndexChanged += new System.EventHandler(this.ActualizarListadoProductos);
+            this.cbProveedores.SelectedIndexChanged += new System.EventHandler(this.ActualizarCategoriasProductos);
             // 
             // bgFechas
             // 
@@ -398,7 +399,7 @@ namespace Proyecto_v2
             this.rbTodosProv.TabStop = true;
             this.rbTodosProv.Text = "Todos";
             this.rbTodosProv.UseVisualStyleBackColor = true;
-            this.rbTodosProv.CheckedChanged += new System.EventHandler(this.rbTodosProv_CheckedChanged);
+            this.rbTodosProv.CheckedChanged += new System.EventHandler(this.rbOrigen_CheckedChanged);
             // 
             // rbNacionales
             // 
@@ -410,6 +411,7 @@ namespace Proyecto_v2
             this.rbNacionales.TabStop = true;
             this.rbNacionales.Text = "Nacionales";
             this.rbNacionales.UseVisualStyleBackColor = true;
+            this.rbNacionales.CheckedChanged += new System.EventHandler(this.rbOrigen_CheckedChanged);
             // 
             // rbExtranjeros
             // 
@@ -421,7 +423,7 @@ namespace Proyecto_v2
             this.rbExtranjeros.TabStop = true;
             this.rbExtranjeros.Text = "Extranjeros";
             this.rbExtranjeros.UseVisualStyleBackColor = true;
-            this.rbExtranjeros.CheckedChanged += new System.EventHandler(this.rbExtranjeros_CheckedChanged);
+            this.rbExtranjeros.CheckedChanged += new System.EventHandler(this.rbOrigen_CheckedChanged);
             // 
             // lbProveedores
             // 
@@ -447,7 +449,6 @@ namespace Proyecto_v2
             this.MaximumSize = new System.Drawing.Size(800, 500);
             this.MinimumSize = new System.Drawing.Size(800, 500);
             this.Name = "FPrincipal";
-            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Instrumentos Musicales";
             this.msPrincipal.ResumeLayout(false);

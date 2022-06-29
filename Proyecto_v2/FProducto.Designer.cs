@@ -122,13 +122,14 @@ namespace Proyecto_v2
             this.lNombre.AutoSize = true;
             this.lNombre.Location = new System.Drawing.Point(23, 94);
             this.lNombre.Name = "lNombre";
-            this.lNombre.Size = new System.Drawing.Size(47, 13);
+            this.lNombre.Size = new System.Drawing.Size(53, 13);
             this.lNombre.TabIndex = 15;
-            this.lNombre.Text = "Nombre:";
+            this.lNombre.Text = "Producto:";
             // 
             // cbCategoria
             // 
             this.cbCategoria.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.cbCategoria.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbCategoria.FormattingEnabled = true;
             this.cbCategoria.Location = new System.Drawing.Point(125, 117);
             this.cbCategoria.Name = "cbCategoria";
@@ -265,7 +266,6 @@ namespace Proyecto_v2
             this.MaximumSize = new System.Drawing.Size(280, 320);
             this.MinimumSize = new System.Drawing.Size(280, 320);
             this.Name = "FProducto";
-            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Agregar..";
             this.Load += new System.EventHandler(this.FProducto_Load);

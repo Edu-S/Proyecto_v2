@@ -39,7 +39,7 @@ namespace Proyecto_v2
         private bool esCuitValido(string cuit)
         {
             int codigo = Convert.ToInt32(cuit.Substring(10, 1));
-            return tipoCuitValido(cuit) && ObtenerCodigoVerificador(cuit) == codigo; ;
+            return tipoCuitValido(cuit) && ObtenerCodigoVerificador(cuit) == codigo;
         }
 
         private bool tipoCuitValido(string cuit)
@@ -102,11 +102,11 @@ namespace Proyecto_v2
         {
             epCUIT.Clear();
             if (!mtCuit.MaskFull)
-                epCUIT.SetError(mtCuit, "Debe ingresar un número de CUIT");
+                epCUIT.SetError(mtCuit, "CUIT incompleto");
             else if (!tipoCuitValido(mtCuit.Text))
                 epCUIT.SetError(mtCuit, "Tipo de CUIT no válido");
             else if (!esCuitValido(mtCuit.Text))
-                epCUIT.SetError(mtCuit, "CUIT no válido, el código es " + ObtenerCodigoVerificador(mtCuit.Text));
+                epCUIT.SetError(mtCuit, "CUIT no válido [ Código: " + ObtenerCodigoVerificador(mtCuit.Text) + " ]");
         }
 
         private void tRazonSocial_Validating(object sender, CancelEventArgs e)

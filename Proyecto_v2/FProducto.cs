@@ -13,9 +13,9 @@ namespace Proyecto_v2
     public partial class FProducto : Form
     {
         #region Variables Globales
-        Coleccion datos;
-        bool agregarProducto;
-        int codigo;
+        private Coleccion datos;
+        private bool agregarProducto;
+        private int codigo;
         #endregion
 
         #region Métodos Propios

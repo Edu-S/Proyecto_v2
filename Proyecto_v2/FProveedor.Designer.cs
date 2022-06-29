@@ -136,7 +136,6 @@ namespace Proyecto_v2
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "FProveedor";
-            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FProveedor";
             this.Load += new System.EventHandler(this.FProveedor_Load);

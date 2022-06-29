@@ -21,7 +21,8 @@ namespace Proyecto_v2
         private void actualizarProveedores()
         {
             List<string> lista, listaNombres;
-            listaNombres = datos.NombresProveedores();
+            
+            listaNombres = (rbTodosProv.Checked) ? datos.NombresProveedores(): datos.NombresProveedores(rbNacionales.Checked);
 
             cbProveedores.Items.Clear();
             cbProveedores.Items.Add("Todos");
@@ -44,8 +45,11 @@ namespace Proyecto_v2
 
         private void actualizarCategorias()
         {
-            string selecTipo = (rbTodosProd.Checked) ? rbTodosProd.Text : (rbInstrumentos.Checked) ? rbInstrumentos.Text : rbAccesorios.Text;
-            List<string> listaCategorias = datos.ProductoCategorias(selecTipo);
+            string tipo = (rbTodosProd.Checked) ? rbTodosProd.Text : (rbInstrumentos.Checked) ? rbInstrumentos.Text : rbAccesorios.Text;
+            string origen = (rbTodosProv.Checked) ? rbTodosProv.Text : (rbNacionales.Checked) ? rbNacionales.Text : rbExtranjeros.Text;
+            string cuit_proveedor = datos.ProveedorCuit(cbProveedores.Text);
+
+            List<string> listaCategorias = datos.ProductoCategorias(tipo, origen, cuit_proveedor);
             
             cbCategoria.Items.Clear();
             cbCategoria.Items.Add("Todas");
@@ -61,18 +65,18 @@ namespace Proyecto_v2
         private void actualizarProductos()
         {
             List<string> lista;
-            string selecCategoria, selecTipo, selecProveedor;
+            string selecCategoria, selecTipo, selecProveedor, selecOrigen;
 
             selecTipo = (rbTodosProd.Checked) ? rbTodosProd.Text : (rbInstrumentos.Checked) ? rbInstrumentos.Text : rbAccesorios.Text;
             selecCategoria = cbCategoria.Text.Trim();
-
             selecProveedor = datos.ProveedorCuit(cbProveedores.Text);
+            selecOrigen = (rbTodosProv.Checked) ? rbTodosProv.Text : (rbExtranjeros.Checked) ? rbExtranjeros.Text : rbNacionales.Text;
 
-            lista = datos.ListarProductos(selecTipo,selecCategoria,selecProveedor,dtInicio.Value,dtFin.Value);
+            lista = datos.ListarProductos(selecTipo,selecCategoria,selecProveedor, selecOrigen, dtInicio.Value,dtFin.Value);
 
             lbProductos.Items.Clear();
-            foreach (string s in lista)
-                lbProductos.Items.Add(s);
+            foreach (string item in lista)
+                lbProductos.Items.Add(item);
 
             lCantProdLista.Text = "Cantidad de productos en la lista: " + lbProductos.Items.Count;
             lTotalProductos.Text = "Cantidad total de productos: " + datos.CantidadProductos();
@@ -98,24 +102,20 @@ namespace Proyecto_v2
             cbCategoria.SelectedIndex = 0;
         }
 
-        private void rbTodosProv_CheckedChanged(object sender, EventArgs e)
+        private void rbOrigen_CheckedChanged(object sender, EventArgs e)
         {
             actualizarProveedores();
-        }
-
-        private void rbExtranjeros_CheckedChanged(object sender, EventArgs e)
-        {
-            actualizarProveedores();
-        }
-
-        private void ActualizarListadoProductos(object sender, EventArgs e)
-        {
-            actualizarProductos();
+            actualizarCategorias();
         }
 
         private void ActualizarCategoriasProductos(object sender, EventArgs e)
         {
             actualizarCategorias();
+        }
+
+        private void ActualizarListadoProductos(object sender, EventArgs e)
+        {
+            actualizarProductos();
         }
 
         private void dtInicio_ValueChanged(object sender, EventArgs e)
@@ -144,7 +144,6 @@ namespace Proyecto_v2
             fCargarProveedor.ShowDialog();
             if (fCargarProveedor.DialogResult == DialogResult.OK)
             {
-                MessageBox.Show("Se agrego un nuevo proveedor","Info", MessageBoxButtons.OK,MessageBoxIcon.Information);
                 actualizarProveedores();
 
                 if (datos.CantidadProveedores() > 0)
@@ -156,6 +155,8 @@ namespace Proyecto_v2
                     if (datos.CantidadProductos() > 0)
                         miModificarProd.Enabled = true;
                 }
+
+                MessageBox.Show("Se agrego un nuevo proveedor","Info", MessageBoxButtons.OK,MessageBoxIcon.Information);
             }
             else
                 MessageBox.Show("Nuevo proveedor cancelado", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -172,8 +173,9 @@ namespace Proyecto_v2
 
                 if (fCargarProveedor.DialogResult == DialogResult.OK)
                 {
-                    MessageBox.Show("Se modificó el proveedor", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     actualizarProveedores();
+                    
+                    MessageBox.Show("Se modificó el proveedor", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                     MessageBox.Show("Se canceló modificar proveedor", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -193,7 +195,6 @@ namespace Proyecto_v2
                 if(respuesta == DialogResult.Yes)
                 {
                     datos.EliminarProveedor(cuit_proveedor);
-                    MessageBox.Show("Se eliminó el proveedor", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     actualizarProveedores();
                     actualizarProductos();
@@ -205,6 +206,8 @@ namespace Proyecto_v2
                         miAgregarProd.Enabled = false;
                         miModificarProd.Enabled = false;
                     }
+
+                    MessageBox.Show("Se eliminó el proveedor", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                     MessageBox.Show("Eliminar proveedor cancelado", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -219,8 +222,6 @@ namespace Proyecto_v2
             fCargarProducto.ShowDialog();
             if (fCargarProducto.DialogResult == DialogResult.OK)
             {
-                MessageBox.Show("Se agrego un nuevo producto", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
                 actualizarCategorias();
 
                 if (datos.CantidadProductos() == 1)
@@ -228,6 +229,8 @@ namespace Proyecto_v2
                     miModificarProd.Enabled = true;
                     miEliminarProd.Enabled = true;
                 }
+
+                MessageBox.Show("Se agrego un nuevo producto", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
                 MessageBox.Show("Nuevo producto cancelado", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -243,8 +246,9 @@ namespace Proyecto_v2
                 fCargarProducto.ShowDialog();
                 if (fCargarProducto.DialogResult == DialogResult.OK)
                 {
-                    MessageBox.Show("Se modifico el producto", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     actualizarCategorias();
+
+                    MessageBox.Show("Se modifico el producto", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                     MessageBox.Show("Modificar producto cancelado", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -259,16 +263,11 @@ namespace Proyecto_v2
             {
                 int codigo = Convert.ToInt32(lbProductos.Text.Split()[0]);
 
-                DialogResult respuesta = MessageBox.Show("¿Está seguro que quiere eliminar el proveedor?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult respuesta = MessageBox.Show("¿Está seguro que quiere eliminar el producto?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (respuesta == DialogResult.Yes)
                 {
-                    if (datos.ExisteAccesorio(codigo))
-                        datos.EliminarAccesorio(codigo);
-                    else
-                        datos.EliminarInstrumento(codigo);
-
-                    MessageBox.Show("Se eliminó el producto", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    datos.EliminarProducto(codigo);
 
                     actualizarProveedores();
                     actualizarProductos();
@@ -278,6 +277,8 @@ namespace Proyecto_v2
                         miModificarProd.Enabled = false;
                         miEliminarProd.Enabled = false;
                     }
+
+                    MessageBox.Show("Se eliminó el producto", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                     MessageBox.Show("Eliminar producto cancelado", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
