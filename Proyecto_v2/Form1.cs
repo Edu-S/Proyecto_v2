@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using libreria_productos;
 
 namespace Proyecto_v2
 {
@@ -88,7 +87,7 @@ namespace Proyecto_v2
         {
             InitializeComponent();
             datos = new Coleccion();
-
+            
             dtInicio.MaxDate = DateTime.Today;
             dtFin.MaxDate = DateTime.Today;
 
@@ -97,18 +96,19 @@ namespace Proyecto_v2
 
             cbProveedores.Items.Add("Todos");
             cbProveedores.SelectedIndex = 0;
-
-            cbCategoria.Items.Add("Todas");
-            cbCategoria.SelectedIndex = 0;
         }
 
-        private void rbOrigen_CheckedChanged(object sender, EventArgs e)
+        private void rbTipo_Click(object sender, EventArgs e)
         {
-            actualizarProveedores();
             actualizarCategorias();
         }
 
-        private void ActualizarCategoriasProductos(object sender, EventArgs e)
+        private void rbOrigen_Click(object sender, EventArgs e)
+        {
+            actualizarProveedores();
+        }
+
+        private void cbProveedores_SelectedIndexChanged(object sender, EventArgs e)
         {
             actualizarCategorias();
         }
@@ -116,6 +116,18 @@ namespace Proyecto_v2
         private void ActualizarListadoProductos(object sender, EventArgs e)
         {
             actualizarProductos();
+        }
+
+        private void chOrdenarProd_CheckedChanged(object sender, EventArgs e)
+        {
+            lbProductos.Sorted = chOrdenarProd.Checked;
+            actualizarProductos();
+        }
+
+        private void chOrdenarProv_CheckedChanged(object sender, EventArgs e)
+        {
+            lbProveedores.Sorted = chOrdenarProv.Checked;
+            actualizarProveedores();
         }
 
         private void dtInicio_ValueChanged(object sender, EventArgs e)
@@ -188,26 +200,33 @@ namespace Proyecto_v2
         {
             if(lbProveedores.SelectedIndex != -1)
             {
+                bool eliminacionExitosa = false;
                 string cuit_proveedor = lbProveedores.Text.Split()[0];
 
                 DialogResult respuesta = MessageBox.Show("¿Está seguro que quiere eliminar el proveedor?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if(respuesta == DialogResult.Yes)
                 {
-                    datos.EliminarProveedor(cuit_proveedor);
+                    
+                    eliminacionExitosa = datos.EliminarProveedor(cuit_proveedor);
 
-                    actualizarProveedores();
-                    actualizarProductos();
-
-                    if (datos.CantidadProveedores() == 0)
+                    if (eliminacionExitosa)
                     {
-                        miModificarProveedor.Enabled = false;
-                        miEliminarProveedor.Enabled = false;
-                        miAgregarProd.Enabled = false;
-                        miModificarProd.Enabled = false;
-                    }
+                        actualizarProveedores();
+                        actualizarProductos();
 
-                    MessageBox.Show("Se eliminó el proveedor", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        if (datos.CantidadProveedores() == 0)
+                        {
+                            miModificarProveedor.Enabled = false;
+                            miEliminarProveedor.Enabled = false;
+                            miAgregarProd.Enabled = false;
+                            miModificarProd.Enabled = false;
+                        }
+
+                        MessageBox.Show("Se eliminó el proveedor", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                        MessageBox.Show("No se pudo eliminar al proveedor, porque tiene productos asociados.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else
                     MessageBox.Show("Eliminar proveedor cancelado", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -289,10 +308,8 @@ namespace Proyecto_v2
 
         private void msiAcercaDe_Click(object sender, EventArgs e)
         {
-            string mensaje = "Programa realizado como proyecto de la materia";
-            mensaje += "\nDiseño y Desarrollo de la Programación Administrativa\n";
-            mensaje += "\nDesarrolladores: Eduardo Sanhueza y Fiorella Rossi";
-            MessageBox.Show(mensaje);
+            string mensaje = "Integrantes del grupo:\n\n  > Rossi, Fiorella\n  > Sanhueza, Eduardo";
+            MessageBox.Show(mensaje,"", MessageBoxButtons.OK,MessageBoxIcon.Information);
         }
 
         private void msiSalir_Click(object sender, EventArgs e)

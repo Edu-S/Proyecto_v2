@@ -29,6 +29,7 @@ namespace Proyecto_v2
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FPrincipal));
             this.msPrincipal = new System.Windows.Forms.MenuStrip();
             this.msiProveedores = new System.Windows.Forms.ToolStripMenuItem();
             this.miAgregarProveedor = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,6 +42,7 @@ namespace Proyecto_v2
             this.msiAcercaDe = new System.Windows.Forms.ToolStripMenuItem();
             this.msiSalir = new System.Windows.Forms.ToolStripMenuItem();
             this.pProductos = new System.Windows.Forms.Panel();
+            this.chOrdenarProd = new System.Windows.Forms.CheckBox();
             this.rbTodosProd = new System.Windows.Forms.RadioButton();
             this.rbInstrumentos = new System.Windows.Forms.RadioButton();
             this.rbAccesorios = new System.Windows.Forms.RadioButton();
@@ -58,6 +60,7 @@ namespace Proyecto_v2
             this.lTotalProductos = new System.Windows.Forms.Label();
             this.lbProductos = new System.Windows.Forms.ListBox();
             this.pProveedores = new System.Windows.Forms.Panel();
+            this.chOrdenarProv = new System.Windows.Forms.CheckBox();
             this.lCantProvLista = new System.Windows.Forms.Label();
             this.lTotalProveedores = new System.Windows.Forms.Label();
             this.rbTodosProv = new System.Windows.Forms.RadioButton();
@@ -73,7 +76,7 @@ namespace Proyecto_v2
             // 
             // msPrincipal
             // 
-            this.msPrincipal.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.msPrincipal.BackColor = System.Drawing.Color.LightSteelBlue;
             this.msPrincipal.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.msiProveedores,
             this.msiProductos,
@@ -162,7 +165,7 @@ namespace Proyecto_v2
             // msiAcercaDe
             // 
             this.msiAcercaDe.Name = "msiAcercaDe";
-            this.msiAcercaDe.ShortcutKeys = System.Windows.Forms.Keys.F1;
+            this.msiAcercaDe.ShortcutKeys = System.Windows.Forms.Keys.F12;
             this.msiAcercaDe.Size = new System.Drawing.Size(71, 20);
             this.msiAcercaDe.Text = "&Acerca de";
             this.msiAcercaDe.Click += new System.EventHandler(this.msiAcercaDe_Click);
@@ -170,15 +173,16 @@ namespace Proyecto_v2
             // msiSalir
             // 
             this.msiSalir.Name = "msiSalir";
-            this.msiSalir.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
+            this.msiSalir.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
             this.msiSalir.Size = new System.Drawing.Size(41, 20);
             this.msiSalir.Text = "&Salir";
             this.msiSalir.Click += new System.EventHandler(this.msiSalir_Click);
             // 
             // pProductos
             // 
-            this.pProductos.BackColor = System.Drawing.SystemColors.Control;
+            this.pProductos.BackColor = System.Drawing.Color.AliceBlue;
             this.pProductos.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pProductos.Controls.Add(this.chOrdenarProd);
             this.pProductos.Controls.Add(this.rbTodosProd);
             this.pProductos.Controls.Add(this.rbInstrumentos);
             this.pProductos.Controls.Add(this.rbAccesorios);
@@ -192,6 +196,17 @@ namespace Proyecto_v2
             this.pProductos.Size = new System.Drawing.Size(449, 422);
             this.pProductos.TabIndex = 1;
             // 
+            // chOrdenarProd
+            // 
+            this.chOrdenarProd.AutoSize = true;
+            this.chOrdenarProd.Location = new System.Drawing.Point(316, 377);
+            this.chOrdenarProd.Name = "chOrdenarProd";
+            this.chOrdenarProd.Size = new System.Drawing.Size(117, 17);
+            this.chOrdenarProd.TabIndex = 13;
+            this.chOrdenarProd.Text = "Ordenar por código";
+            this.chOrdenarProd.UseVisualStyleBackColor = true;
+            this.chOrdenarProd.CheckedChanged += new System.EventHandler(this.chOrdenarProd_CheckedChanged);
+            // 
             // rbTodosProd
             // 
             this.rbTodosProd.AutoSize = true;
@@ -203,7 +218,7 @@ namespace Proyecto_v2
             this.rbTodosProd.TabStop = true;
             this.rbTodosProd.Text = "Todos";
             this.rbTodosProd.UseVisualStyleBackColor = true;
-            this.rbTodosProd.CheckedChanged += new System.EventHandler(this.ActualizarCategoriasProductos);
+            this.rbTodosProd.Click += new System.EventHandler(this.rbTipo_Click);
             // 
             // rbInstrumentos
             // 
@@ -215,7 +230,7 @@ namespace Proyecto_v2
             this.rbInstrumentos.TabStop = true;
             this.rbInstrumentos.Text = "Instrumentos";
             this.rbInstrumentos.UseVisualStyleBackColor = true;
-            this.rbInstrumentos.CheckedChanged += new System.EventHandler(this.ActualizarCategoriasProductos);
+            this.rbInstrumentos.Click += new System.EventHandler(this.rbTipo_Click);
             // 
             // rbAccesorios
             // 
@@ -227,7 +242,7 @@ namespace Proyecto_v2
             this.rbAccesorios.TabStop = true;
             this.rbAccesorios.Text = "Accesorios";
             this.rbAccesorios.UseVisualStyleBackColor = true;
-            this.rbAccesorios.CheckedChanged += new System.EventHandler(this.ActualizarCategoriasProductos);
+            this.rbAccesorios.Click += new System.EventHandler(this.rbTipo_Click);
             // 
             // gbFiltros
             // 
@@ -277,7 +292,7 @@ namespace Proyecto_v2
             this.cbProveedores.Name = "cbProveedores";
             this.cbProveedores.Size = new System.Drawing.Size(119, 21);
             this.cbProveedores.TabIndex = 9;
-            this.cbProveedores.SelectedIndexChanged += new System.EventHandler(this.ActualizarCategoriasProductos);
+            this.cbProveedores.SelectedIndexChanged += new System.EventHandler(this.cbProveedores_SelectedIndexChanged);
             // 
             // bgFechas
             // 
@@ -357,8 +372,9 @@ namespace Proyecto_v2
             // 
             // pProveedores
             // 
-            this.pProveedores.BackColor = System.Drawing.SystemColors.Control;
+            this.pProveedores.BackColor = System.Drawing.Color.AliceBlue;
             this.pProveedores.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pProveedores.Controls.Add(this.chOrdenarProv);
             this.pProveedores.Controls.Add(this.lCantProvLista);
             this.pProveedores.Controls.Add(this.lTotalProveedores);
             this.pProveedores.Controls.Add(this.rbTodosProv);
@@ -370,10 +386,21 @@ namespace Proyecto_v2
             this.pProveedores.Size = new System.Drawing.Size(295, 422);
             this.pProveedores.TabIndex = 2;
             // 
+            // chOrdenarProv
+            // 
+            this.chOrdenarProv.AutoSize = true;
+            this.chOrdenarProv.Location = new System.Drawing.Point(157, 349);
+            this.chOrdenarProv.Name = "chOrdenarProv";
+            this.chOrdenarProv.Size = new System.Drawing.Size(110, 17);
+            this.chOrdenarProv.TabIndex = 14;
+            this.chOrdenarProv.Text = "Ordenar por CUIT";
+            this.chOrdenarProv.UseVisualStyleBackColor = true;
+            this.chOrdenarProv.CheckedChanged += new System.EventHandler(this.chOrdenarProv_CheckedChanged);
+            // 
             // lCantProvLista
             // 
             this.lCantProvLista.AutoSize = true;
-            this.lCantProvLista.Location = new System.Drawing.Point(18, 376);
+            this.lCantProvLista.Location = new System.Drawing.Point(18, 373);
             this.lCantProvLista.Name = "lCantProvLista";
             this.lCantProvLista.Size = new System.Drawing.Size(185, 13);
             this.lCantProvLista.TabIndex = 8;
@@ -382,7 +409,7 @@ namespace Proyecto_v2
             // lTotalProveedores
             // 
             this.lTotalProveedores.AutoSize = true;
-            this.lTotalProveedores.Location = new System.Drawing.Point(19, 396);
+            this.lTotalProveedores.Location = new System.Drawing.Point(19, 393);
             this.lTotalProveedores.Name = "lTotalProveedores";
             this.lTotalProveedores.Size = new System.Drawing.Size(161, 13);
             this.lTotalProveedores.TabIndex = 7;
@@ -399,7 +426,7 @@ namespace Proyecto_v2
             this.rbTodosProv.TabStop = true;
             this.rbTodosProv.Text = "Todos";
             this.rbTodosProv.UseVisualStyleBackColor = true;
-            this.rbTodosProv.CheckedChanged += new System.EventHandler(this.rbOrigen_CheckedChanged);
+            this.rbTodosProv.Click += new System.EventHandler(this.rbOrigen_Click);
             // 
             // rbNacionales
             // 
@@ -411,7 +438,7 @@ namespace Proyecto_v2
             this.rbNacionales.TabStop = true;
             this.rbNacionales.Text = "Nacionales";
             this.rbNacionales.UseVisualStyleBackColor = true;
-            this.rbNacionales.CheckedChanged += new System.EventHandler(this.rbOrigen_CheckedChanged);
+            this.rbNacionales.Click += new System.EventHandler(this.rbOrigen_Click);
             // 
             // rbExtranjeros
             // 
@@ -423,14 +450,14 @@ namespace Proyecto_v2
             this.rbExtranjeros.TabStop = true;
             this.rbExtranjeros.Text = "Extranjeros";
             this.rbExtranjeros.UseVisualStyleBackColor = true;
-            this.rbExtranjeros.CheckedChanged += new System.EventHandler(this.rbOrigen_CheckedChanged);
+            this.rbExtranjeros.Click += new System.EventHandler(this.rbOrigen_Click);
             // 
             // lbProveedores
             // 
             this.lbProveedores.FormattingEnabled = true;
             this.lbProveedores.Location = new System.Drawing.Point(22, 40);
             this.lbProveedores.Name = "lbProveedores";
-            this.lbProveedores.Size = new System.Drawing.Size(244, 329);
+            this.lbProveedores.Size = new System.Drawing.Size(244, 303);
             this.lbProveedores.TabIndex = 1;
             this.lbProveedores.SelectedIndexChanged += new System.EventHandler(this.lbProveedores_SelectedIndexChanged);
             // 
@@ -438,11 +465,12 @@ namespace Proyecto_v2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Control;
+            this.BackColor = System.Drawing.Color.LightSteelBlue;
             this.ClientSize = new System.Drawing.Size(784, 462);
             this.Controls.Add(this.pProductos);
             this.Controls.Add(this.pProveedores);
             this.Controls.Add(this.msPrincipal);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MainMenuStrip = this.msPrincipal;
             this.MaximizeBox = false;
@@ -450,7 +478,7 @@ namespace Proyecto_v2
             this.MinimumSize = new System.Drawing.Size(800, 500);
             this.Name = "FPrincipal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Instrumentos Musicales";
+            this.Text = "Productos Musicales";
             this.msPrincipal.ResumeLayout(false);
             this.msPrincipal.PerformLayout();
             this.pProductos.ResumeLayout(false);
@@ -503,6 +531,8 @@ namespace Proyecto_v2
         private System.Windows.Forms.GroupBox bgFechas;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox chOrdenarProd;
+        private System.Windows.Forms.CheckBox chOrdenarProv;
     }
 }
 

@@ -30,6 +30,7 @@ namespace Proyecto_v2
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FProducto));
             this.bCancelar = new System.Windows.Forms.Button();
             this.bAceptar = new System.Windows.Forms.Button();
             this.tNombre = new System.Windows.Forms.TextBox();
@@ -244,6 +245,7 @@ namespace Proyecto_v2
             this.AcceptButton = this.bAceptar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Lavender;
             this.CancelButton = this.bCancelar;
             this.ClientSize = new System.Drawing.Size(264, 282);
             this.Controls.Add(this.gbTipo);
@@ -261,6 +263,7 @@ namespace Proyecto_v2
             this.Controls.Add(this.bAceptar);
             this.Controls.Add(this.tNombre);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(280, 320);

@@ -34,7 +34,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="libreria_productos">
+    <Reference Include="libreria_productos, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\libreria_productos\libreria_productos\bin\Debug\libreria_productos.dll</HintPath>
     </Reference>
     <Reference Include="System" />

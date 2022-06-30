@@ -58,9 +58,10 @@ namespace Proyecto_v2
             if (agregarProducto)
             {
                 Text = "Agregar Nuevo Producto";
-                mtCodigo.Clear();
 
+                mtCodigo.Clear();
                 mtCodigo.Enabled = true;
+
                 gbTipo.Enabled = true;
                 rbInstrumento.Checked = true;
 

@@ -30,6 +30,7 @@ namespace Proyecto_v2
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FProveedor));
             this.lbl_Cuit = new System.Windows.Forms.Label();
             this.mtCuit = new System.Windows.Forms.MaskedTextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -123,6 +124,7 @@ namespace Proyecto_v2
             this.AcceptButton = this.bAceptar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Lavender;
             this.CancelButton = this.bCancelar;
             this.ClientSize = new System.Drawing.Size(279, 163);
             this.Controls.Add(this.chNacional);
@@ -133,6 +135,7 @@ namespace Proyecto_v2
             this.Controls.Add(this.mtCuit);
             this.Controls.Add(this.lbl_Cuit);
             this.HelpButton = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "FProveedor";

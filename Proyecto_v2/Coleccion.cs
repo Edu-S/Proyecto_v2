@@ -132,7 +132,7 @@ namespace Proyecto_v2
             producto.codigo = codigo;
             posicion = listaProductos.IndexOf(producto);
 
-            if (posicion > -1)
+            if (posicion >= 0)
                 nombre = listaProductos.ElementAt(posicion).nombre;
 
             return nombre;
@@ -152,7 +152,7 @@ namespace Proyecto_v2
             producto.codigo = codigo;
             posicion = listaProductos.IndexOf(producto);
 
-            if (posicion > -1)
+            if (posicion >= 0)
                 categoria = listaProductos.ElementAt(posicion).categoria;
 
             return categoria;
@@ -172,7 +172,7 @@ namespace Proyecto_v2
             producto.codigo = codigo;
             posicion = listaProductos.IndexOf(producto);
 
-            if (posicion > -1)
+            if (posicion >= 0)
                 precio = listaProductos.ElementAt(posicion).precio_compra;
 
             return precio;
@@ -192,7 +192,7 @@ namespace Proyecto_v2
             producto.codigo = codigo;
             posicion = listaProductos.IndexOf(producto);
 
-            if (posicion > -1)
+            if (posicion >= 0)
                 fecha = listaProductos.ElementAt(posicion).fecha_compra;
 
             return fecha;
@@ -212,7 +212,7 @@ namespace Proyecto_v2
             producto.codigo = codigo;
             posicion = listaProductos.IndexOf(producto);
 
-            if (posicion > -1)
+            if (posicion >= 0)
                 nombre_proveedor = listaProductos.ElementAt(posicion).proveedor.razon_social;
 
             return nombre_proveedor;
@@ -356,7 +356,7 @@ namespace Proyecto_v2
             List<string> nombres = NombresProveedores();
             int posicion = nombres.IndexOf(razonSocial);
             string cuit = "";
-            if (posicion > -1)
+            if (posicion >= 0)
                 cuit = listaProveedores.ElementAt(posicion).cuit;
             return cuit;
         }
@@ -366,7 +366,7 @@ namespace Proyecto_v2
             Proveedor proveedor = new Proveedor();
             proveedor.cuit = cuit;
             int posicion = listaProveedores.IndexOf(proveedor);
-            if (posicion > -1)
+            if (posicion >= 0)
                 proveedor = listaProveedores.ElementAt(posicion);
             return proveedor.razon_social;
         }
@@ -376,7 +376,7 @@ namespace Proyecto_v2
             Proveedor proveedor = new Proveedor();
             proveedor.cuit = cuit;
             int posicion = listaProveedores.IndexOf(proveedor);
-            if (posicion > -1)
+            if (posicion >= 0)
                 proveedor = listaProveedores.ElementAt(posicion);
             return proveedor.es_nacional;
         }
@@ -388,7 +388,7 @@ namespace Proyecto_v2
             Proveedor proveedor = new Proveedor();
             proveedor.cuit = cuit_proveedor;
             int posicion = listaProveedores.IndexOf(proveedor);
-            if (posicion > -1)
+            if (posicion >= 0)
             {
                 Instrumento instrumento = new Instrumento(codigo, nombre, categoria, precio_compra, fecha_compra, listaProveedores.ElementAt(posicion));
                 if (!listaProductos.Contains(instrumento))
@@ -402,12 +402,12 @@ namespace Proyecto_v2
             proveedor.cuit = cuit_proveedor;
             int posicion = listaProveedores.IndexOf(proveedor);
             
-            if (posicion > -1)
+            if (posicion >= 0)
             {
                 Instrumento instrumento = new Instrumento(codigo, nombre, categoria, precio_compra, fecha_compra, listaProveedores.ElementAt(posicion));
                 posicion = listaProductos.IndexOf(instrumento);
                 
-                if (posicion > -1)
+                if (posicion >= 0)
                 {
                     listaProductos.RemoveAt(posicion);
                     listaProductos.Insert(posicion, instrumento);
@@ -421,7 +421,7 @@ namespace Proyecto_v2
             proveedor.cuit = cuit_proveedor;
             int posicion = listaProveedores.IndexOf(proveedor);
 
-            if (posicion > -1)
+            if (posicion >= 0)
             {
                 Accesorio accesorio = new Accesorio(codigo, nombre, categoria, precio_compra, fecha_compra, listaProveedores.ElementAt(posicion));
                 if (!listaProductos.Contains(accesorio))
@@ -435,12 +435,12 @@ namespace Proyecto_v2
             proveedor.cuit = cuit_proveedor;
             int posicion = listaProveedores.IndexOf(proveedor);
 
-            if (posicion > -1)
+            if (posicion >= 0)
             {
                 Accesorio accesorio = new Accesorio(codigo, nombre, categoria, precio_compra, fecha_compra, listaProveedores.ElementAt(posicion));
                 posicion = listaProductos.IndexOf(accesorio);
 
-                if (posicion > -1)
+                if (posicion >= 0)
                 {
                     listaProductos.RemoveAt(posicion);
                     listaProductos.Insert(posicion, accesorio);
@@ -461,7 +461,7 @@ namespace Proyecto_v2
             
             int posicion = listaProductos.IndexOf(producto);
 
-            if (posicion > -1)
+            if (posicion >= 0)
                 listaProductos.RemoveAt(posicion);
         }
         #endregion
@@ -479,35 +479,35 @@ namespace Proyecto_v2
             Proveedor proveedor = new Proveedor(cuit, razon_social, es_nacional);
             int posicion = listaProveedores.IndexOf(proveedor);
 
-            if (posicion > -1)
+            if (posicion >= 0)
             {
                 listaProveedores.RemoveAt(posicion);
                 listaProveedores.Insert(posicion, proveedor);
             }
         }
 
-        public void EliminarProveedor(string cuit_proveedor)
+        public bool EliminarProveedor(string cuit_proveedor)
         {
             Proveedor proveedor = new Proveedor();
             proveedor.cuit = cuit_proveedor;
+
             int posicion = listaProveedores.IndexOf(proveedor);
 
-            if (posicion > -1)
-            {
-                //// Elimina todos los productos con el proveedor a eliminar
-                //List<Producto> lista = new List<Producto>();
-                //foreach (Producto prod in listaProductos)
-                //    if (prod.proveedor.Equals(proveedor))
-                //        lista.Add(prod);
-                //foreach (Producto prod in lista)
-                //    listaProductos.Remove(prod);
+            bool tiene_productos = false;
+            bool se_elimino = false;
 
+            if (posicion >= 0)
+            {
                 foreach (Producto prod in listaProductos)
                     if (prod.proveedor.Equals(proveedor))
-                        prod.proveedor = new Proveedor();
-
-                listaProveedores.RemoveAt(posicion);
+                        tiene_productos = true;
+                if (!tiene_productos)
+                {
+                    listaProveedores.RemoveAt(posicion);
+                    se_elimino = true;
+                }
             }
+            return se_elimino;
         }
         #endregion
 
